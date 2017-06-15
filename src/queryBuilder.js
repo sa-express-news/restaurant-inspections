@@ -15,19 +15,19 @@ export default {
             if (!Object.prototype.toString.call(date) === "[object Date]") {
                 return reject('variable passed to queryBuilder is not a date');
             }
-
             return resolve('hi there');
         });
     },
     makeNumberTwoDigits: function(num: number) {
         return new Promise((resolve, reject) => {
-            // if (isNaN(num)) {
+            if (isNaN(num)) {
+                return reject('variable passed to makeNumberTwoDigits is not a number');
+            }
 
-            //     return reject('variable passed to makeNumberTwoDigits is not a number');
-            // }
-            // return resolve('sdasdf');
-
-            return resolve('asdasdasdasd');
+            if (num < 1 || num > 12) {
+                return reject('variable passed to makeNumberTwoDigits is not a valid month number');
+            }
+            return resolve(num);
         });
     }
 };
