@@ -2,7 +2,13 @@
 'use strict';
 
 // import { convertDateToMDY } from './queryBuilder';
-import { fetchPage } from './pageFetcher';
+// import { fetchPage } from './pageFetcher';
+import { collectInspectionLinks } from './inspectionLinkCollector';
+
+collectInspectionLinks(['asdas', 555, {foo: 'bar'}])
+.then((result)=>{
+	console.log(result);
+});
 
 // import queryBuilder from './queryBuilder';
 
