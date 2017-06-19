@@ -6,14 +6,13 @@ process.on('unhandledRejection', function(reason, p) {
     return;
 });
 
-import { formatDate, makeNumberTwoDigitString, convertDateToMDY, getDateAWeekPrior } from '../src/queryBuilder';
-
-
 
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 const assert = chai.assert;
+
+import { formatDate, makeNumberTwoDigitString, convertDateToMDY, getDateAWeekPrior } from '../src/queryBuilder';
 
 const dateFormatter = formatDate;
 

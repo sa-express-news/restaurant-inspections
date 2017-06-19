@@ -1,35 +1,62 @@
 // @flow
 'use strict';
 
-import queryBuilder from './queryBuilder';
+// import { convertDateToMDY } from './queryBuilder';
+import { fetchPage } from './pageFetcher';
 
-queryBuilder.makeNumberTwoDigits(6)
-    .then((result) => {
-        console.log(typeof result);
-    });
+// import queryBuilder from './queryBuilder';
+
+// queryBuilder.formatDate(new Date())
+// 	.then((result)=>{
+// 		console.log(result);
+// 	});
+
+// const jsdom = require("jsdom");
+// const { JSDOM } = jsdom;
+
+// JSDOM.fromURL('http://example.org').then(dom => {
+//     const page = dom.window.document;
+
+//     // console.log(page instanceof HTMLDocument);
+
+//     console.log(Object.prototype.toString.call(page));
+
+//     //RETURNS [object Document]
+// })
+
+// fetchPage('https://example.org')
+//     .then(page => {
+//         // console.log(page.getElementsByTagName('h1')[0].textContent);
+//         console.log(typeof page === 'object');
+//     });
+
+
 
 //Generate today's date
 
 //QUERYBUILDER.JS
-//PARAMS - today's date
+//PARAMS - a date
 //Reformat today as 06/05/2017
 //Create 7 days ago formatted same
 //RETURNS query string
 
-//INSPECTIONCOLLECTOR.JS
+//INSPECTIONPAGECOLLECTOR.JS
 //PARAMS = query string
 //Ping first page using date string
+//Collect every link with a 'search.cfm?start=' parameter
+//Push each link to an array
+//RETURNS array of page links
+
+//INSPECTIONCOLLECTOR.JS
+//PARAMS = array of page links
+//Map array of page links >
 //Collect every search.cfm link to an inspection
 //Push every link to an array
-//Ping the next page
-//Collect every link to inspection, etc.
-//Ping pages until you get a blank page
-//RETURNS array of links
+//RETURNS array of links to individual inspections
 
 //INSPECTIONPARSER.JS
 //PARAMS = array of links
-//Map array of links >
-//Parse score
+//Filter array of links >
 //If score < 90
 //Collect name, score, inspection date, address, violations
 //Pass to 
