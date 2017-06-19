@@ -22,10 +22,12 @@ describe('Page collector', function() {
         assert.isDefined(collectPages);
     });
     it('should reject if passed a non-string', function() {
-        assert.isRejected(collectPages(0));
-        assert.isRejected(collectPages({ foo: 'bar' }));
-        assert.isRejected(collectPages(new Date()));
-        assert.isRejected(collectPages([0, 5]));
+        return Promise.all([
+            assert.isRejected(collectPages(0)),
+            assert.isRejected(collectPages({ foo: 'bar' })),
+            assert.isRejected(collectPages(new Date())),
+            assert.isRejected(collectPages([0, 5]))
+        ]);
     });
     it.skip('should return an array', function() {
         return assert.eventually.typeOf(collectPages(urlString), 'array');

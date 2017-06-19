@@ -22,28 +22,30 @@ describe('date reformatter', function() {
     });
 
     it('should reject if passed a non-Date', function() {
-
-        //WHY DOES THIS FAIL WHEN I ADD RETURN?
-
-        assert.isRejected(dateFormatter('foo'));
+        return Promise.all([
+            assert.isRejected(dateFormatter('foo')),
+            assert.isRejected(dateFormatter(555)),
+            assert.isRejected(dateFormatter({ foo: 'bar' })),
+            assert.isRejected(dateFormatter([0, 1]))
+        ]);
     });
 
     it('should return a string', function() {
         const date = new Date(2017, 5, 19);
         return assert.eventually.typeOf((dateFormatter(date)), 'string');
     });
-    it('should return a URL string with the proper date range as parameters', function(){
+    it('should return a URL string with the proper date range as parameters', function() {
         const tests = [
-            {arg: new Date(2017, 5, 19), expected: 'http://tx.healthinspections.us/san%20antonio/search.cfm?1=1&sd=06/12/2017&ed=06/19/2017&kw1=&kw2=&kw3=&rel1=L.licenseName&rel2=L.licenseName&rel3=L.licenseName&zc=&dtRng=YES&pre=similar&smoking=ANY'},
-            {arg: new Date(2017, 5, 6), expected: 'http://tx.healthinspections.us/san%20antonio/search.cfm?1=1&sd=05/30/2017&ed=06/06/2017&kw1=&kw2=&kw3=&rel1=L.licenseName&rel2=L.licenseName&rel3=L.licenseName&zc=&dtRng=YES&pre=similar&smoking=ANY'},
-            {arg: new Date(2017, 0, 4), expected: 'http://tx.healthinspections.us/san%20antonio/search.cfm?1=1&sd=12/28/2016&ed=01/04/2017&kw1=&kw2=&kw3=&rel1=L.licenseName&rel2=L.licenseName&rel3=L.licenseName&zc=&dtRng=YES&pre=similar&smoking=ANY'}
-        
+            { arg: new Date(2017, 5, 19), expected: 'http://tx.healthinspections.us/san%20antonio/search.cfm?1=1&sd=06/12/2017&ed=06/19/2017&kw1=&kw2=&kw3=&rel1=L.licenseName&rel2=L.licenseName&rel3=L.licenseName&zc=&dtRng=YES&pre=similar&smoking=ANY' },
+            { arg: new Date(2017, 5, 6), expected: 'http://tx.healthinspections.us/san%20antonio/search.cfm?1=1&sd=05/30/2017&ed=06/06/2017&kw1=&kw2=&kw3=&rel1=L.licenseName&rel2=L.licenseName&rel3=L.licenseName&zc=&dtRng=YES&pre=similar&smoking=ANY' },
+            { arg: new Date(2017, 0, 4), expected: 'http://tx.healthinspections.us/san%20antonio/search.cfm?1=1&sd=12/28/2016&ed=01/04/2017&kw1=&kw2=&kw3=&rel1=L.licenseName&rel2=L.licenseName&rel3=L.licenseName&zc=&dtRng=YES&pre=similar&smoking=ANY' }
+
         ];
         return Promise.all([
             assert.eventually.strictEqual(dateFormatter(tests[0].arg), tests[0].expected),
             assert.eventually.strictEqual(dateFormatter(tests[1].arg), tests[1].expected),
             assert.eventually.strictEqual(dateFormatter(tests[2].arg), tests[2].expected)
-            ]);
+        ]);
     });
 });
 
