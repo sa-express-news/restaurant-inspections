@@ -9,16 +9,17 @@ export function collectPages(url: string) {
         } else {
             return resolve(fetchPage(url)
                 .then((page) => {
-                    const links = Object.values(page.getElementsByTagName('a'));
-                    const pageLinks = links.filter(filterLinks).map((link)=>{
-                        return link.href;
+                    const links = Object.values(page.getElementsByTagName('a')).map((object) => {
+                        return object.href;
                     });
+                    const pageLinks = links.filter(isInspectionPageLink);
+                    console.log(pageLinks);
                     return pageLinks;
                 }));
-
-            function filterLinks(link){
-                return link.href.indexOf('search.cfm?start=') !== -1;
-            }
         }
     })
+}
+
+export function isInspectionPageLink(link: string) {
+    return link.indexOf('search.cfm?start=') !== -1;
 }
